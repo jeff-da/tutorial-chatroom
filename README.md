@@ -5,7 +5,7 @@ title: Getting started with Expo + Socket.io
 ### Goal
 In this tutorial we will show you the simplicity of creating a mobile chatroom application with React Native, Expo, and Socket.io. We will learn how to create a server to store and send chat messages, and how to communicate with that server in Expo.
 
-Demo (scan in Expo app): <a href="https://expo.io/@jeff/exoo-chatroom3">https://expo.io/@lele0108/floatyplane-gl</a>
+Demo (scan in Expo app): <a href="https://expo.io/@jeff/exoo-chatroom3">https://expo.io/@jeff/exoo-chatroom</a>
 
 <img src="https://i.imgur.com/ltwTzJF.png" width="100px">
 
@@ -16,19 +16,21 @@ Demo (scan in Expo app): <a href="https://expo.io/@jeff/exoo-chatroom3">https://
 * Expo XDE + iOS/Android App
 
 ### Starter Code
-The starter code sets up the basics of creating a React Native app with Expo and Three.js. It also has some skeletons of our game. Run this in terminal:
+For our chatroom, we will need a list of messages, a box to type out message in, and a button to send the message. I've gone ahead and coded these 3 elements for us and put it in a Github repo. While most of the functionality is style and layout, there are a few notable areas:
+- I use a KeyboardAvoidingView. This allows us to avoid the keyboard from obstructing the text box when we type in it.
+- I use react-native-invertible-scroll-view for the list of messages. This flips the chat box so we don't need to worry about scrolling down to see new messages.
 
 ```
-git clone https://github.com/expo/floatyplane-starter.git
-cd floatyplane-starter
+git clone https://github.com/jeff-da/chatroom-skeleton.git
+cd chatroom-skeleton
 npm install
 ```
 
-Open the Expo XDE and click Project-->Open Project and navigate to the floatyplane-starer folder. Expo will load the project and you will be able to beam the code to your phone using the Expo native app.
+Open the Expo XDE and click Project-->Open Project and navigate to the chatroom-skeleton folder. Expo will load the project and you will be able to beam the code to your phone using the Expo native app.
 
-**Checkpoint: If you see a solid blue screen on your phone, everything is working!**
+**Checkpoint: If you see a layout that looks like the photo below, you're in the right place!**
 
-<img src="http://i.imgur.com/y8FYDUP.png" width="200px"/>
+<img src="http://i.imgur.com/eYfUHj4.png" width="200px"/>
 
 ### Three.js Basics
 Three is a Javascript library that makes it easy to create WebGL 3D graphics. There are three things needed to display graphics:
@@ -97,7 +99,7 @@ export const createStart = (THREEView) => {
 
 And that's all the meshes we need for our game! Full code of `scene.js` <a href="https://github.com/expo/floatyplane/blob/master/utilities/index.js">here</a> for reference.
 
-Now we're going to write code that adds these meshes to the scene. Let's move our attention to our main file `Game/index.js`. First we'll create a function that will add the plane and start screen graphics to the scene. 
+Now we're going to write code that adds these meshes to the scene. Let's move our attention to our main file `Game/index.js`. First we'll create a function that will add the plane and start screen graphics to the scene.
 
 We'll add this to the `createGameScene` function (in `Game/index.js`):
 
@@ -126,13 +128,13 @@ if (this.state.started) {
   if (this.planeMesh.position.y < (this.height / 2) * -1 || this.planeMesh.position.y > (this.height / 2)) {
     alert("You Lost!"); // if plane hits top or bottom of screen
     this.resetScene(); // resets the scene to the original state
-  } else { 
+  } else {
     this.velocity -= 7 * dt; // simulate gravity in plane
     this.planeMesh.translateY(this.velocity*dt); // move plane down
   }
 }
-``` 
-In our `PanResponder` (React's gesture detector), we call `touch` when a tap is detected. Let's make it so we increase the velocity of the plane to a positive number (making the place go up). 
+```
+In our `PanResponder` (React's gesture detector), we call `touch` when a tap is detected. Let's make it so we increase the velocity of the plane to a positive number (making the place go up).
 
 Add the following to `touch` in `Game/index.js`:
 
@@ -251,7 +253,7 @@ Since the plane is always located at `x = 0`, we want to check when the pillar p
 Add to `animatePillar`:
 
 ```
-//Add Ater Nullity Check 
+//Add Ater Nullity Check
 /*
 	if (!object) {
      return;
