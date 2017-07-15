@@ -14,6 +14,7 @@ Demo (scan in Expo app): <a href="https://expo.io/@jeff/exoo-chatroom3">https://
 * NodeJS 6+ (LTS)
 * Git
 * Expo XDE + iOS/Android App
+* Socket.io
 
 ### Starter Code
 For our chatroom, we will need a list of messages, a box to type out message in, and a button to send the message. I've gone ahead and coded these 3 elements for us and put it in a Github repo. While most of the functionality is style and layout, there are a few notable areas:
