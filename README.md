@@ -33,7 +33,7 @@ Open the Expo XDE and click Project-->Open Project and navigate to the chatroom-
 
 <img src="http://i.imgur.com/eYfUHj4.png" width="200px"/>
 
-### Three.js Basics
+### Socket.io Basics
 Three is a Javascript library that makes it easy to create WebGL 3D graphics. There are three things needed to display graphics:
 
 1. Camera: Points at what you see on your screen
